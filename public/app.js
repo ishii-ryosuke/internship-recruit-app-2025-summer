@@ -1,17 +1,19 @@
 import { firebaseConfig } from "./firebase-config.js";
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+import { signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+import { getFirestore } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
 
-// アプリの初期化処理
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
+// Firebase アプリの初期化
+export const app = initializeApp(firebaseConfig);
+// Firestore のインスタンスをエクスポート
+export const firestore = getFirestore(app);
 
-// ID：authButtonを付与したボタンがクリックされたときの処理
+// TODO:動作確認用のため用削除。ID：authButtonを付与したボタンがクリックされたときの処理
 document.getElementById("authButton").addEventListener("click", () => {
   signInAnonymously(auth);
 });
 
-// 認証情報が変わったときの処理
+// TODO:動作確認用のため用削除。認証情報が変わったときの処理
 onAuthStateChanged(auth, (user) => {
   if (user) {
     alert("ログインしました: " + user.uid);
