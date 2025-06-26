@@ -12,8 +12,8 @@ import {
   query,
   serverTimestamp,
   Timestamp,
-} from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
-import { app } from "./index.js";
+} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+import { app } from "../app.js";
 
 class FirestoreWrapper {
   constructor() {

@@ -5,16 +5,12 @@ import {
   signOut,
   onAuthStateChanged,
   sendPasswordResetEmail,
-  signInWithPopup,
-  GoogleAuthProvider,
-} from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
-import { app } from "./index.js";
+} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+import { app } from "../app.js";
 
 class AuthWrapper {
   constructor() {
     this.auth = getAuth(app);
-    // Google 認証プロバイダー
-    this.googleProvider = new GoogleAuthProvider();
   }
 
   // ユーザー登録 (Email/Password)
@@ -34,16 +30,6 @@ class AuthWrapper {
       return userCredential.user;
     } catch (error) {
       throw new Error(`Failed to login: ${error.message}`);
-    }
-  }
-
-  // Google ログイン
-  async loginWithGoogle() {
-    try {
-      const userCredential = await signInWithPopup(this.auth, this.googleProvider);
-      return userCredential.user;
-    } catch (error) {
-      throw new Error(`Failed to login with Google: ${error.message}`);
     }
   }
 
