@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const modalBackdrop = document.getElementById("modalBackdrop");
       const modalPanel = document.getElementById("modalPanel");
-      const openBtn = document.getElementById("openModal");
+      const openBtn = document.getElementById("openUserDataEditModal");
       const closeBtn = document.getElementById("cancelModal");
       const postBtn = document.getElementById("postModal");
 
