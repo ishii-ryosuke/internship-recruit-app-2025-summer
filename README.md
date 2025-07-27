@@ -73,6 +73,13 @@ internship-recruit-app/
     起動したアプリは `Ctrl + C` で停止することができます。
 
 4. アプリのデプロイ
+    `public/app.js の以下の変数を `null` に更新しておきましょう。
+    更新を忘れると本番環境で Firebase の Auth と Firestore に接続ができずエラーが発生します。
+    ```js
+    // エミュレーターのホストとポートを設定
+    export const authEmulatorHost = null;        // null にすると本番
+    export const firestoreEmulatorHost = null;  // null にすると本番
+    ```
     以下のコマンドで Firebase Hosting にデプロイできます。
     ```shell
     firebase deploy
