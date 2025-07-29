@@ -1,16 +1,27 @@
 import {
   getAuth,
+  connectAuthEmulator,
   createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  signOut,
   onAuthStateChanged,
   sendPasswordResetEmail,
+  signInWithPopup,
+  signInWithEmailAndPassword,
+  signOut,
+  GoogleAuthProvider,
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
-import { app } from "../app.js";
+import { app, authEmulatorHost } from "../app.js";
 
 class AuthWrapper {
   constructor() {
     this.auth = getAuth(app);
+    // Google 認証プロバイダー
+    this.googleProvider = new GoogleAuthProvider();
+
+    // エミュレーターの接続設定
+    if (authEmulatorHost) {
+      console.log("[AuthWrapper] connecting to emulator:", authEmulatorHost);
+      connectAuthEmulator(this.auth, authEmulatorHost);
+    }
   }
 
   // ユーザー登録 (Email/Password)
