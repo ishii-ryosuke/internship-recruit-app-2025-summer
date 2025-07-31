@@ -91,3 +91,5 @@ onUserChange(() => {
   // ユーザー情報を再取得して表示
   loadAndDisplayUserInfo();
 });
+
+loadAndDisplayUserInfo();
