@@ -12,12 +12,22 @@ import {
   query,
   serverTimestamp,
   Timestamp,
-} from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
-import { app } from "./index.js";
+  connectFirestoreEmulator
+} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+import { app, firestoreEmulatorHost } from "../app.js";
 
 class FirestoreWrapper {
   constructor() {
     this.db = getFirestore(app);
+
+    // ★ エミュレーター接続設定（firestoreEmulatorHost があれば接続）
+    if (firestoreEmulatorHost) {
+      // "localhost:8080" のようにホストとポートを分解
+      const [host, portStr] = firestoreEmulatorHost.replace("http://", "").split(":");
+      const port = Number(portStr);
+      console.log("[FirestoreWrapper] connecting to emulator:", host, port);
+      connectFirestoreEmulator(this.db, host, port);
+    }
   }
 
   /**
