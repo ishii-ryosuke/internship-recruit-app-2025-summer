@@ -1,5 +1,6 @@
 import AuthWrapper from "../firebase-wrapper/auth.js";
 import FirestoreWrapper from "../firebase-wrapper/firestore.js";
+import { loadAndDisplayUserInfo } from "./header.js";
 
 const auth = new AuthWrapper();
 const firestore = new FirestoreWrapper();
@@ -63,8 +64,11 @@ document.addEventListener("DOMContentLoaded", () => {
             updated: FirestoreWrapper.dateToTimestamp(new Date()),
           };
 
-          // TODO: ここでAPI送信やデータ保存処理を行う
+          // データ保存処理を行う
           await firestore.updateDocument("users", users[0].id, userData);
+
+          // 最新のユーザー情報を取得して、ヘッダーを再描画する
+          loadAndDisplayUserInfo();
 
           // モーダルを閉じる
           modalBackdrop.classList.add("hidden");
