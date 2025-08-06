@@ -48,7 +48,7 @@ function displayUser(displayName, email, icon) {
 /**
  * Firestore からログイン中のユーザー情報を取得して表示する関数
  */
-async function loadAndDisplayUserInfo() {
+export async function loadAndDisplayUserInfo() {
   // 現在ログイン中のユーザー情報を取得
   const currentUser = getCurrentUser();
 
