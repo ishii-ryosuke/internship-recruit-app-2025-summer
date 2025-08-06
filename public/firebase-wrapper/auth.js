@@ -44,16 +44,6 @@ class AuthWrapper {
     }
   }
 
-  // Google ログイン
-  async loginWithGoogle() {
-    try {
-      const userCredential = await signInWithPopup(this.auth, this.googleProvider);
-      return userCredential.user;
-    } catch (error) {
-      throw new Error(`Failed to login with Google: ${error.message}`);
-    }
-  }
-
   // ログアウト
   async logout() {
     try {

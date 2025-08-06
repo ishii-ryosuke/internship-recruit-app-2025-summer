@@ -14,20 +14,3 @@ export const app = initializeApp(firebaseConfig);
 export const firestore = new FirestoreWrapper(app);
 // Auth のインスタンスをエクスポート
 export const auth = new AuthWrapper(app);
-
-// TODO:動作確認用のため用削除。ID：authButtonを付与したボタンがクリックされたときの処理
-document.getElementById("authButton").addEventListener("click", async () => {
-  try {
-    const user = await auth.login("test@example.com", "Password123");
-    console.log("ログイン成功:", user.uid);
-  } catch (e) {
-    console.error("ログイン失敗:", e);
-  }
-});
-
-// TODO:動作確認用のため用削除。認証情報が変わったときの処理
-onAuthStateChanged(auth, (user) => {
-  if (user) {
-    alert("ログインしました: " + user.uid);
-  }
-});
