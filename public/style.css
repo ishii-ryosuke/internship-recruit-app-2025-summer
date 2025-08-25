@@ -3,3 +3,7 @@ body {
   text-align: center;
   margin-top: 50px;
 }
+
+.input {
+  border: 2px solid black;
+}
