@@ -5,8 +5,8 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/fireba
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 
 // エミュレーターのホストとポートを設定
-export const authEmulatorHost = "http://localhost:9099";        // null にすると本番
-export const firestoreEmulatorHost = "http://localhost:8080";  // null にすると本番
+export const authEmulatorHost = "http://localhost:9099"; // null にすると本番
+export const firestoreEmulatorHost = "http://localhost:8080"; // null にすると本番
 
 // Firebase アプリの初期化
 export const app = initializeApp(firebaseConfig);
