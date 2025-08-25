@@ -1,6 +1,6 @@
 import AuthWrapper from "../firebase-wrapper/auth.js";
 import FirestoreWrapper from "../firebase-wrapper/firestore.js";
-import { loadAndDisplayUserInfo } from "./header.js";
+import { getCurrentUser, onUserChange } from "../auth/authState.js";
 
 const auth = new AuthWrapper();
 const firestore = new FirestoreWrapper();
@@ -44,7 +44,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // 👇 登録ボタンのクリック処理
         postBtn.addEventListener("click", async () => {
-          const currentUser = auth.getCurrentUser();
+          const currentUser = getCurrentUser();
+          console.log(currentUser.email);
+          const user_data = await firestore.getDocuments("users", [
+            { field: "email", operator: "==", value: currentUser.email },
+          ]);
+          const email_data = user_data[0];
+          const email = email_data.email;
           const company_name =
             document.getElementById("company_name")?.value || "";
           const place = document.getElementById("place")?.value || "";
@@ -52,6 +58,7 @@ document.addEventListener("DOMContentLoaded", () => {
           const exp = document.getElementById("exp")?.value || "";
 
           const companyData = {
+            email: email, //E-mail
             company_name: company_name, // 企業名
             place: place, // 所在地
             job: jobs, //業種
