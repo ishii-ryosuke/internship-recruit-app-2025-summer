@@ -35,8 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         postBtn.addEventListener("click", async () => {
-          const currentUser = auth.getCurrentUser();
-          const name = document.getElementById("name")?.value || "";
+
           const start = document.getElementById("start-time").value;
           const end = document.getElementById("end-time").value;
           const title = document.getElementById("te-ma").value;
@@ -84,33 +83,53 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
           }
 
-          alert("就活の予定が登録できました。");
+          // 現在のユーザーを取得
+const currentUser = auth.getCurrentUser();
 
-          // スケジュール登録
-          const scheduleData = {
-            title: title,
-            start_day: startday,
-            start_time: start,
-            end_day: endday,
-            end_time: end,
-            place: location,
-            memo: memo,
-            created: FirestoreWrapper.dateToTimestamp(new Date()),
-          };
+try {
+  // Firestoreからuser情報を取得
+  const users = await firestore.getDocuments("users", [
+    { field: "email", operator: "==", value: currentUser.email }
+  ]);
 
-          await firestore.createDocument("schedule", scheduleData);
+  if (users.length === 0) {
+    alert("ユーザー情報が見つかりません。");
+    return;
+  }
 
-          // ヘッダー再描画
-          loadAndDisplayUserInfo();
+  const userData = users[0];
 
-          // モーダルを閉じる
-          modalBackdrop.classList.add("hidden");
-          modalPanel.classList.add("hidden");
-        });
+  // スケジュールデータ作成
+  const scheduleData = {
+    email: userData.email,
+    title: title,
+    start_day: startday,
+    start_time: start,
+    end_day: endday,
+    end_time: end,
+    place: location,
+    memo: memo,
+    created: FirestoreWrapper.dateToTimestamp(new Date())
+  };
+
+  await firestore.createDocument("schedule", scheduleData);
+
+  alert("就活の予定が登録できました。");
+
+  loadAndDisplayUserInfo();
+
+  modalBackdrop.classList.add("hidden");
+  modalPanel.classList.add("hidden");
+
+} catch (error) {
+  console.error("スケジュール登録時のエラー:", error);
+  alert("スケジュール登録に失敗しました。");
+}
+        }); // ← postBtn.addEventListener の終了
 
       } else {
         console.error("モーダル要素が正しく読み込まれていません");
       }
     });
-});
+}); // ← DOMContentLoaded の終了
 
