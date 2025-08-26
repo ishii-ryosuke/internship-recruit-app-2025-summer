@@ -46,6 +46,10 @@ document.addEventListener("DOMContentLoaded", () => {
         postBtn.addEventListener("click", async () => {
           const currentUser = getCurrentUser();
           console.log(currentUser.email);
+
+          const sample = await firestore.getDocuments("users");
+          console.log("users:", sample);
+
           const user_data = await firestore.getDocuments("users", [
             { field: "email", operator: "==", value: currentUser.email },
           ]);
@@ -67,6 +71,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
           try {
             //入力されてた企業名が登録されていれば取得
+
+            const sample = await firestore.getDocuments("companys");
+            console.log("companys:", sample);
+
             const same_name = await firestore.getDocuments("companys", [
               {
                 field: "company_name",
