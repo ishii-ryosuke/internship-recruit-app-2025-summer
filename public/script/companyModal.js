@@ -1,6 +1,6 @@
 import AuthWrapper from "../firebase-wrapper/auth.js";
 import FirestoreWrapper from "../firebase-wrapper/firestore.js";
-import { getCurrentUser, onUserChange } from "../auth/authState.js";
+import { getCurrentUser } from "../auth/authState.js";
 
 const auth = new AuthWrapper();
 const firestore = new FirestoreWrapper();
@@ -67,7 +67,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
           try {
             //入力されてた企業名が登録されていれば取得
-            const same_name = await firestore.getDocuments("companys", [
+            const same_name = await firestore.getDocuments("company", [
               {
                 field: "company_name",
                 operator: "==",
@@ -83,7 +83,7 @@ document.addEventListener("DOMContentLoaded", () => {
               alert("この企業は既に登録されています。");
               return;
             } else {
-              await firestore.createDocument("companys", companyData);
+              await firestore.createDocument("company", companyData);
               console.log("regtest");
               alert("企業情報を登録しました");
             }
