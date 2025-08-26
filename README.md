@@ -88,3 +88,6 @@ internship-recruit-app/
 5. 注意事項
 - `public/firebase-config.js` は Git 管理対象外 です。`.gitignore` によって除外されています。
   - プロジェクトを他の人と共有する場合、個別に `firebase-config.js` を作成してもらうようにしてください。
+
+
+  test
