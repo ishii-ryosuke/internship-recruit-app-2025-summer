@@ -25,7 +25,7 @@ document.querySelectorAll(".delete").forEach(function (btn3) {
 async function loadCompanyData() {
   try {
     const allCompanies = await firestore.getDocuments("company");
-    // console.log("allCompanies", allCompanies);
+    console.log("allCompanies", allCompanies);
     const filteredData = allCompanies.map((doc) => ({
       company_name: doc.company_name ?? null,
       job: doc.job ?? null,
@@ -49,7 +49,7 @@ async function loadCompanyData() {
     console.error("データ取得失敗", error);
   }
 }
-loadCompanyData();
+setInterval(loadCompanyData, 1000);
 
 const container = document.getElementById("container");
 const source = document.querySelector(".eiwa");
