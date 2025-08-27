@@ -1,0 +1,93 @@
+
+<body>
+  <!-- モーダルのバックドロップ -->
+  <div id="schedule_modalBackdrop" class="hidden fixed inset-0 bg-gray-500/75 transition-opacity" aria-hidden="true"></div>
+
+  <!-- モーダルパネル -->
+  <div id="schedule_modalPanel" class="hidden fixed inset-0 z-10 w-screen overflow-y-auto">
+    <div class=" flex items-center justify-center min-h-screen">
+      <div class="bg-white shadow-lg rounded-lg max-w-[80%]  p-10 space-y-5  relative">
+        <!-- フォーム -->
+        <form class="space-y-7">
+          <!-- タイトル -->
+          <label>タイトル</label>
+          <input
+            id="te-ma"
+            type="text"
+            class="w-[100%] h-12 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+
+          <!-- 日付と時間 -->
+          <div class="grid grid-cols-4 gap-4 space-x-4">
+            <div>
+              <label for="start-day">開始日</label><br />
+              <input
+                type="date"
+                id="start-day"
+                class="w-[100%] h-[100%] border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
+            <div>
+              <label for="end-day">終了日</label><br />
+              <input
+                type="date"
+                id="end-day"
+                class="w-[100%] h-[100%] border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
+            <div>
+              <label for="start-time">開始時間</label><br />
+              <input
+                type="time"
+                id="start-time"
+                class="w-[100%] h-[100%] border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
+            <div>
+              <label for="end-time">終了時間</label><br />
+              <input
+                type="time"
+                id="end-time"
+                class="w-[100%] h-[100%] border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
+          </div>
+
+          <!-- 場所 -->
+          <label>場所</label>
+          <input
+            type="text"
+            id="location"
+            class="w-[100%] h-12 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+
+          <!-- メモ -->
+          <label>メモ</label>
+          <textarea
+            id="memo"
+            class="w-[100%] h-24 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          ></textarea>
+
+          <!-- ボタン -->
+          <div class="flex justify-end space-x-4">
+            <button
+              id="schedule_cancelModal"
+              type="reset"
+              class="w-24 py-3 bg-stone-50 text-black border border-gray-300 font-medium rounded-md hover:bg-stone-200"
+            >
+              キャンセル
+            </button>
+            <button
+              id="schedule_postModal"
+              type="button"
+              class="w-24 py-3 bg-blue-500 text-white font-medium rounded-md hover:bg-blue-600"
+              
+            >
+              登録
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</body>
