@@ -1,6 +1,7 @@
 import AuthWrapper from "../firebase-wrapper/auth.js";
 import FirestoreWrapper from "../firebase-wrapper/firestore.js";
 
+
 const auth = new AuthWrapper();
 const firestore = new FirestoreWrapper();
 
