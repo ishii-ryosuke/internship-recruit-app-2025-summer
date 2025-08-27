@@ -1,0 +1,79 @@
+.company {
+  position: absolute;
+  top: 125px;
+  left: 300px;
+  display: flex;
+  justify-content: space-between;
+  font-size: large;
+  font-weight: bold;
+  /* text-shadow: 2px 2px 4px #b3a4ac; */
+  /* text-decoration:underline; */
+}
+.eiwa {
+  position: absolute;
+  left: 260px;
+  display: flex;
+  justify-content: space-between;
+  font-size: small;
+  margin-right: 30px;
+}
+.sukebo {
+  color: green;
+  border: 2px solid green;
+  font-size: 16px;
+  background-color: white;
+  border-radius: 3rem;
+  padding: 10px;
+}
+.sukebo:hover {
+  background-color: hsla(137, 39%, 74%, 0.979);
+}
+.edit {
+  color: rgb(7, 7, 231);
+  border: 2px solid rgb(14, 92, 238);
+  font-size: 16px;
+  background-color: white;
+  border-radius: 3rem;
+  padding: 10px;
+}
+.edit:hover {
+  background-color: rgba(146, 191, 226, 0.979);
+}
+.delete {
+  color: rgb(241, 9, 9);
+  border: 2px solid rgb(248, 2, 6);
+  font-size: 16px;
+  background-color: white;
+  border-radius: 3rem;
+  padding: 10px;
+}
+.delete:hover {
+  background-color: rgba(238, 199, 199, 0.979);
+}
+.button-container {
+  display: flex;
+  gap: 40px;
+  margin-left: 70px;
+}
+
+.eiwa {
+  display: flexbox;
+  justify-content: space-between;
+  width: 100px;
+  height: 100px;
+  justify-content: center;
+  margin-left: 0;
+  /* top: 200px;
+    left: 300; */
+  /* width: max-content; */
+  padding-top: auto;
+  padding-left: 5px;
+  padding-right: 30px;
+  border: 2px solid rgba(238, 241, 238, 0.781);
+  background-color: whit;
+}
+.card {
+  border: 2px solid purple;
+  top: 200px;
+  left: 300px;
+}
