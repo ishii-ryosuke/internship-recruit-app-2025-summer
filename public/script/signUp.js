@@ -57,12 +57,19 @@ async function createAccount(event) {
  */
 function showErrorMessage(error) {
   console.error("Error during registration:", error);
-  if (error.code === "auth/email-already-in-use" || error.message.includes("auth/email-already-in-use")) {
+  if (
+    error.code === "auth/email-already-in-use" ||
+    error.message.includes("auth/email-already-in-use")
+  ) {
     alert(
       "このメールアドレスは既に登録されています。別のメールアドレスで作成してください。"
     );
   } else {
-    alert(`アカウント作成に失敗しました: ${error.code || "Unknown"} - ${error.message || "No message available"}`);
+    alert(
+      `アカウント作成に失敗しました: ${error.code || "Unknown"} - ${
+        error.message || "No message available"
+      }`
+    );
   }
 }
 
@@ -92,4 +99,6 @@ function moveToHome() {
 }
 
 // 「Create Account」ボタンがクリックされたときの処理を登録
-document.getElementById("createAccount").addEventListener("click", createAccount);
+document
+  .getElementById("createAccount")
+  .addEventListener("click", createAccount);
