@@ -123,8 +123,8 @@ const fetchAndDisplayCompanies = async () => {
                 <span class="text-lg font-medium text-gray-700">${company.place}</span>
                 <span class="text-lg font-medium text-gray-700">${company.exp}</span>
 
-                <button onclick="location.href='./companySchedule.html'"
- class="schedule-btn bg-green-500 text-white font-bold py-2 px-4 rounded-full shadow-md hover:bg-green-600 transition-colors duration-200" data-id="${company.id}">スケジュール</button>
+                <button onclick="location.href='./companySchedule.html?id=${company.id}'" id="schedulecalenderbutton"
+ class="schedule-btn bg-green-500 text-white font-bold py-2 px-4 rounded-full shadow-md hover:bg-green-600 transition-colors duration-200" >スケジュール</button>
 
                 <button class="delete-btn bg-red-500 text-white font-bold py-2 px-4 rounded-full shadow-md hover:bg-red-600 transition-colors duration-200" data-id="${company.id}">削除</button>
             `;
