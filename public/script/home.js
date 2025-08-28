@@ -119,6 +119,13 @@ const fetchAndDisplayCompanies = async () => {
       // ドキュメントIDをdata-id属性に埋め込む
       companyItem.innerHTML = `
                 <span class="text-lg font-medium text-gray-700">${company.company_name}</span>
+                <span class="text-lg font-medium text-gray-700">${company.job}</span>
+                <span class="text-lg font-medium text-gray-700">${company.place}</span>
+                <span class="text-lg font-medium text-gray-700">${company.exp}</span>
+
+                <button onclick="location.href='./companySchedule.html'"
+ class="schedule-btn bg-green-500 text-white font-bold py-2 px-4 rounded-full shadow-md hover:bg-green-600 transition-colors duration-200" data-id="${company.id}">スケジュール</button>
+
                 <button class="delete-btn bg-red-500 text-white font-bold py-2 px-4 rounded-full shadow-md hover:bg-red-600 transition-colors duration-200" data-id="${company.id}">削除</button>
             `;
 

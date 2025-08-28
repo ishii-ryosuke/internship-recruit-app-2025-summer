@@ -94,7 +94,6 @@ document.addEventListener("DOMContentLoaded", () => {
               await firestore.createDocument("company", companyData);
               console.log("regtest");
               alert("企業情報を登録しました");
-              fetchAndDisplayCompanies();
             }
           } catch (error) {
             // エラー発生時のログ出力とアラート表示
