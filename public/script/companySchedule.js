@@ -4,6 +4,16 @@ import { loadAndDisplayUserInfo } from "./header.js";
 
 const auth = new AuthWrapper();
 const firestore = new FirestoreWrapper();
+const params = new URLSearchParams(window.location.search);
+const companyId = params.get('id');
+
+    console.log("選択された会社ID:", companyId);
+    // FirestoreなどでこのIDを使ってデータを取得
+
+
+
+
+
 
 let startDates = []; // 🔥 start_day の日付リストを保持
 
@@ -16,6 +26,9 @@ function generate_year_range(start, end) {
 }
 
 var today = new Date();
+
+var oneweek = new Date(today);
+oneweek.setDate(today.getDate() + 7);
 var currentMonth = today.getMonth();
 var currentYear = today.getFullYear();
 var selectYear = document.getElementById("year");
@@ -60,10 +73,27 @@ function jump() {
   showCalendar(currentMonth, currentYear);
 }
 
+async function loadCompanyNameData() {
+    try{
+        const allCompany = await firestore.getDocuments("schedule", [
+    { field: "id", operator: "==", value: `${companyId}`}
+  ]);
+    const companyselectName = await firestore.getDocument("company", companyId);
+        console.log("companyName", allCompany );
+        console.log("companyName", companyselectName );
+        const companyinformation = document.getElementById("companytitle");
+        companyinformation.innerHTML = companyselectName.company_name +"の予定";
+
+    } catch (error) {
+        console.error("企業名が見つかりませんでした", error);
+    }
+}
+loadCompanyNameData()
 async function loadcompanyDate() {
   try {
     const allschedule = await firestore.getDocuments("schedule");
-
+// [
+//     { field: "id", operator: "==", value: `${companyId}`}]
     startDates = allschedule
       .map(doc => doc.start_day)
       .filter(date => date !== null)
@@ -125,10 +155,10 @@ function showCalendar(month, year) {
          startDate.getDate() === date
         );
        if (matchedStartDate) {
-  if (matchedStartDate == today + 60*60*24) {
-    cell.style.backgroundColor = "red"; // 未来の予定
+  if (matchedStartDate < oneweek && matchedStartDate > today  ) {
+    cell.style.backgroundColor ="#ffb006ff"; // 未来の予定
   } else {
-    cell.style.backgroundColor = "gray";
+    cell.style.backgroundColor = "#8b8b8b";
   }
 }
 
@@ -145,3 +175,6 @@ function showCalendar(month, year) {
 function daysInMonth(iMonth, iYear) {
   return 32 - new Date(iYear, iMonth, 32).getDate();
 }
+window.next = next;
+window.previous = previous;
+window.jump = jump;
