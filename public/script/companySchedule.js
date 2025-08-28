@@ -112,23 +112,26 @@ function showCalendar(month, year) {
         ) {
           cell.className += " selected";
         }
-        const todaynow = today.some(today =>
-          today.getDate() === date &&
-          today.getFullYear() === year &&
-          today.getMonth() === month
-
-        )
+        
         // 🔥 start_day に該当する日付をハイライト
         const isStartDate = startDates.some(startDate =>
           startDate.getFullYear() === year &&
           startDate.getMonth() === month &&
           startDate.getDate() === date
         );
+        const matchedStartDate = startDates.find(startDate =>
+          startDate.getFullYear() === year &&
+          startDate.getMonth() === month &&
+         startDate.getDate() === date
+        );
+       if (matchedStartDate) {
+  if (matchedStartDate == today + 60*60*24) {
+    cell.style.backgroundColor = "red"; // 未来の予定
+  } else {
+    cell.style.backgroundColor = "gray";
+  }
+}
 
-        if (isStartDate) {
-          cell.style.backgroundColor = "orange"; // ゴールド色
-          cell.title = "予定あり"; // ツールチップも追加
-        }
 
         row.appendChild(cell);
         date++;
