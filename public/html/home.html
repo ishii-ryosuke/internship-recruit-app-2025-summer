@@ -31,9 +31,17 @@
 
       <!-- Post Button -->
       <button
+        id="openCompanyModal"
+        class="flex items-center justify-center py-2 bg-blue-500 text-white font-medium rounded-3xl hover:bg-blue-600"
+        id="openCompanyModal"
+      >
+        <span class="ml-2">企業登録</span>
+      </button>
+      <button
+        id="schedule_openUserDataEditModal"
         class="flex items-center justify-center py-2 bg-blue-500 text-white font-medium rounded-3xl hover:bg-blue-600"
       >
-        <span class="ml-2" id="openCompanyModal">企業登録</span>
+        <span class="ml-2">予定登録</span>
       </button>
       <button
         class="flex items-center justify-center py-2 bg-blue-500 text-white font-medium rounded-3xl hover:bg-blue-600"
@@ -80,13 +88,15 @@
 
     <!-- モーダルをここに読み込む -->
     <div id="modalContainer"></div>
-    <!-- 登録画面のモーダル -->
     <div id="companyModalContainer"></div>
     <!-- 削除の確認 -->
     <div id="deleteModalContainer"></div>
+    <div id="schedule_modalContainer"></div>
 
     <!-- 外部JavaScriptを読み込む -->
     <script type="module" src="../script/userDataEditModal.js"></script>
+    <script type="module" src="../script/companyModal.js"></script>
+    <script type="module" src="../script/scheduleRegister.js"></script>
     <script type="module" src="../script/header.js"></script>
     <script type="module" src="../script/companyModal.js"></script>
     <script type="module" src="../script/company_delete.js"></script>
