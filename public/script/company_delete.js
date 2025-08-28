@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
       postBtn.addEventListener("click", async () => {
         const name = document.getElementById("name")?.value || "";
 
-        firestore.deleteDocument("companys", "VD3iQuOIW2sCV77xvTN8");
+        firestore.deleteDocument("companys", company.id);
         alert("企業情報を削除しました");
 
         // 仮の処理: 入力内容をログに出力
