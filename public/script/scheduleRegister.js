@@ -111,6 +111,7 @@ document.addEventListener("DOMContentLoaded", () => {
             await firestore.createDocument("schedule", scheduleData);
 
             alert("就活の予定が登録できました。");
+            console.log(companyId);
 
             loadAndDisplayUserInfo();
 
