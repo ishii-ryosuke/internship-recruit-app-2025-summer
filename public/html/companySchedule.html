@@ -10,6 +10,7 @@
   </head>
   <body class="bg-gray-100 min-h-screen flex" data-page="home">
     <!-- Sidebar -->
+    <!-- <div class="box">あ</div> -->
     <aside class="bg-white shadow-md w-64 p-10 pt-16 flex flex-col space-y-6">
       <!-- Navigation Links -->
       <nav class="space-y-6 mb-20">
@@ -74,38 +75,69 @@
       </div>
       <br />
       <div id="schedule_modalContainer"></div>
-      <div class="companytitle">
-        <h1 id="companytitle"></h1>
-      </div>
-      <div class="container-calendar">
-        <div class="button-container-calendar">
-          <button id="previous" onclick="previous()">＜</button>
-          <button id="next" onclick="next()">＞</button>
-        </div>
-        <h4 id="monthAndYear"></h4>
-        <table class="table-calendar" id="calendar" data-lang="ja">
-          <thead id="thead-month"></thead>
-          <tbody id="calendar-body"></tbody>
-        </table>
+       <div class ="companytitle">
+ <h1 id = "companytitle" ></h1></div>
 
-        <div class="footer-container-calendar">
-          <label for="month">日付指定：</label>
-          <select id="month" onchange="jump()">
-            <option value="0">1月</option>
-            <option value="1">2月</option>
-            <option value="2">3月</option>
-            <option value="3">4月</option>
-            <option value="4">5月</option>
-            <option value="5">6月</option>
-            <option value="6">7月</option>
-            <option value="7">8月</option>
-            <option value="8">9月</option>
-            <option value="9">10月</option>
-            <option value="10">11月</option>
-            <option value="11">12月</option>
-          </select>
-          <select id="year" onchange="jump()"></select>
+      <div class="bigbox">
+        <div class="container-calendar">
+          <div class="button-container-calendar">
+            <button id="previous" onclick="previous()">＜</button>
+            <button id="next" onclick="next()">＞</button>
+          </div>
+          <h4 id="monthAndYear"></h4>
+          <table class="table-calendar" id="calendar" data-lang="ja">
+            <thead id="thead-month"></thead>
+            <tbody id="calendar-body"></tbody>
+          </table>
+
+          <div class="footer-container-calendar">
+            <label for="month">日付指定：</label>
+            <select id="month" onchange="jump()">
+              <option value="0">1月</option>
+              <option value="1">2月</option>
+              <option value="2">3月</option>
+              <option value="3">4月</option>
+              <option value="4">5月</option>
+              <option value="5">6月</option>
+              <option value="6">7月</option>
+              <option value="7">8月</option>
+              <option value="8">9月</option>
+              <option value="9">10月</option>
+              <option value="10">11月</option>
+              <option value="11">12月</option>
+            </select>
+            <select id="year" onchange="jump()"></select>
+          </div>
         </div>
+        <div class="box">
+          <span class="title"></span><br>
+          <span></span><br>
+          <span class="memo"></span>
+            <div class="button-container">
+                <button class="sukebo">編集</button>
+                <button class="edit">削除</button>
+
+        </div>
+        <div class="box1 mt-10">
+           <span class="title"></span><br>
+          <span></span><br>
+          <span class="memo"></span>
+            <div class="button-container">
+                <button class="sukebo">編集</button>
+                <button class="edit">削除</button>
+            </div>
+        </div>
+       <div class="box2 mt-70">
+           <span class="title"></span><br>
+          <span></span><br>
+          <span class="memo"></span><br>
+          <span class="start_day"></span>
+            <div class="button-container">
+                <button class="sukebo">編集</button>
+                <button class="edit">削除</button>
+            </div>
+        </div>
+
       </div>
 
       <!-- Table -->
@@ -117,6 +149,7 @@
     <!-- モーダルをここに読み込む -->
     <div id="modalContainer"></div>
     <div id="schedule_modalContainer"></div>
+
 
     <!-- 外部JavaScriptを読み込む -->
     <script type="module" src="../script/userDataEditModal.js"></script>

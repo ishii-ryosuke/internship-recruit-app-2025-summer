@@ -5,22 +5,17 @@ import { loadAndDisplayUserInfo } from "./header.js";
 const auth = new AuthWrapper();
 const firestore = new FirestoreWrapper();
 const params = new URLSearchParams(window.location.search);
-const companyId = params.get('id');
+const companyId = params.get("id");
 
-    console.log("選択された会社ID:", companyId);
-    // FirestoreなどでこのIDを使ってデータを取得
-
- 
-
-
-
+console.log("選択された会社ID:", companyId);
+// FirestoreなどでこのIDを使ってデータを取得
 
 let startDates = []; // 🔥 start_day の日付リストを保持
 
 function generate_year_range(start, end) {
   var years = "";
   for (var year = start; year <= end; year++) {
-      years += "<option value='" + year + "'>" + year + "</option>";
+    years += "<option value='" + year + "'>" + year + "</option>";
   }
   return years;
 }
@@ -38,9 +33,22 @@ var createYear = generate_year_range(1970, 2200);
 document.getElementById("year").innerHTML = createYear;
 
 var calendar = document.getElementById("calendar");
-var lang = calendar.getAttribute('data-lang');
+var lang = calendar.getAttribute("data-lang");
 
-var months = ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"];
+var months = [
+  "1月",
+  "2月",
+  "3月",
+  "4月",
+  "5月",
+  "6月",
+  "7月",
+  "8月",
+  "9月",
+  "10月",
+  "11月",
+  "12月",
+];
 var days = ["日", "月", "火", "水", "木", "金", "土"];
 
 var dayHeader = "<tr>";
@@ -56,14 +64,14 @@ var monthAndYear = document.getElementById("monthAndYear");
 loadcompanyDate();
 
 function next() {
-  currentYear = (currentMonth === 11) ? currentYear + 1 : currentYear;
+  currentYear = currentMonth === 11 ? currentYear + 1 : currentYear;
   currentMonth = (currentMonth + 1) % 12;
   showCalendar(currentMonth, currentYear);
 }
 
 function previous() {
-  currentYear = (currentMonth === 0) ? currentYear - 1 : currentYear;
-  currentMonth = (currentMonth === 0) ? 11 : currentMonth - 1;
+  currentYear = currentMonth === 0 ? currentYear - 1 : currentYear;
+  currentMonth = currentMonth === 0 ? 11 : currentMonth - 1;
   showCalendar(currentMonth, currentYear);
 }
 
@@ -74,34 +82,33 @@ function jump() {
 }
 
 async function loadCompanyNameData() {
-    try{
-        const allCompany = await firestore.getDocuments("schedule", [
-    { field: "id", operator: "==", value: `${companyId}`}
-  ]);
+  try {
+    const allCompany = await firestore.getDocuments("schedule", [
+      { field: "id", operator: "==", value: `${companyId}` },
+    ]);
     const companyselectName = await firestore.getDocument("company", companyId);
-        console.log("companyName", allCompany );
-        console.log("companyName", companyselectName );
-        const companyinformation = document.getElementById("companytitle");
-        companyinformation.innerHTML = companyselectName.company_name +"の予定";
-
-    } catch (error) {
-        console.error("企業名が見つかりませんでした", error);
-    }
+    console.log("companyName", allCompany);
+    console.log("companyName", companyselectName);
+    const companyinformation = document.getElementById("companytitle");
+    companyinformation.innerHTML = companyselectName.company_name + "の予定";
+  } catch (error) {
+    console.error("企業名が見つかりませんでした", error);
+  }
 }
-loadCompanyNameData()
+loadCompanyNameData();
 async function loadcompanyDate() {
   try {
     const allschedule = await firestore.getDocuments("schedule", [
-    { field: "id", operator: "==", value: `${companyId}`}
-  ]);
-    const companyschedule = allschedule.map((doc)=> ({
+      { field: "id", operator: "==", value: `${companyId}` },
+    ]);
+    const companyschedule = allschedule.map((doc) => ({
       start_day: doc.start_day ?? null,
     }));
 
     startDates = companyschedule
-      .map(doc => doc.start_day)
-      .filter(date => date !== null)
-      .map(dateStr => new Date(dateStr)); // 日付型に変換
+      .map((doc) => doc.start_day)
+      .filter((date) => date !== null)
+      .map((dateStr) => new Date(dateStr)); // 日付型に変換
 
     showCalendar(currentMonth, currentYear); // 🔁 日付取得後に描画
   } catch (error) {
@@ -110,7 +117,7 @@ async function loadcompanyDate() {
 }
 
 function showCalendar(month, year) {
-  var firstDay = (new Date(year, month)).getDay();
+  var firstDay = new Date(year, month).getDay();
   var tbl = document.getElementById("calendar-body");
   tbl.innerHTML = "";
 
@@ -146,32 +153,32 @@ function showCalendar(month, year) {
         ) {
           cell.className += " selected";
         }
-        
-        // 🔥 start_day に該当する日付をハイライト
-        const isStartDate = startDates.some(startDate =>
-          startDate.getFullYear() === year &&
-          startDate.getMonth() === month &&
-          startDate.getDate() === date
-        );
-        const matchedStartDate = startDates.find(startDate =>
-          startDate.getFullYear() === year &&
-          startDate.getMonth() === month &&
-         startDate.getDate() === date
-        );
-       if (matchedStartDate) {
-  if (matchedStartDate < oneweek && matchedStartDate > today  ) {
-    cell.style.backgroundColor ="#ffb006ff"; // 未来の予定
-  } else {
-    cell.style.backgroundColor = "#8b8b8b";
-  }
-}
 
+        // 🔥 start_day に該当する日付をハイライト
+        const isStartDate = startDates.some(
+          (startDate) =>
+            startDate.getFullYear() === year &&
+            startDate.getMonth() === month &&
+            startDate.getDate() === date
+        );
+        const matchedStartDate = startDates.find(
+          (startDate) =>
+            startDate.getFullYear() === year &&
+            startDate.getMonth() === month &&
+            startDate.getDate() === date
+        );
+        if (matchedStartDate) {
+          if (matchedStartDate < oneweek && matchedStartDate > today) {
+            cell.style.backgroundColor = "#ffb006ff"; // 未来の予定
+          } else {
+            cell.style.backgroundColor = "#8b8b8b";
+          }
+        }
 
         row.appendChild(cell);
         date++;
       }
     }
-
     tbl.appendChild(row);
   }
 }
@@ -182,3 +189,56 @@ function daysInMonth(iMonth, iYear) {
 window.next = next;
 window.previous = previous;
 window.jump = jump;
+
+document.querySelectorAll(".sukebo").forEach(function (btn1) {
+  btn1.addEventListener("click", function () {
+    console.log("編集がクリックされました。");
+  });
+});
+
+document.querySelectorAll(".edit").forEach(function (btn2) {
+  btn2.addEventListener("click", function () {
+    console.log("削除がクリックされました。");
+  });
+});
+
+async function loadcompanySche() {
+  try {
+    const allschedule = await firestore.getDocuments("schedule");
+    const example = allschedule.map((doc) => ({
+      title: doc.title ?? null,
+      memo: doc.memo ?? null,
+      start_day: doc.start_day ?? null,
+    }));
+    console.log("example", example);
+    // document.getElementsByClassName("title")[0].textContent = example[0].title;
+    // document.getElementsByClassName("memo")[0].textContent = example[0].memo;
+    // document.getElementsByClassName("title")[1].textContent = example[1].title;
+    // document.getElementsByClassName("memo")[1].textContent = example[1].memo;
+    // document.getElementsByClassName("start_day")[0].textContent =
+    //   example[0].start_day;
+
+    let times = [];
+    example.forEach((item) => {
+      times.push(item.start_day);
+    });
+
+    times.sort((a, b) => new Date(a) - new Date(b));
+    console.log(times.map((t) => new Date(t).toISOString()));
+
+    for (let i = 0; i < times.length; i++) {
+      for (let j = 0; j < times.length; j++) {
+        if (example[i].start_day == times[j]) {
+          document.getElementsByClassName("title")[i].textContent =
+            example[j].title;
+          document.getElementsByClassName("memo")[i].textContent =
+            example[j].memo;
+        }
+      }
+    }
+  } catch (error) {
+    console.error("データなし", error);
+  }
+}
+
+loadcompanySche();

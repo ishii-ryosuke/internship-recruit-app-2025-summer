@@ -1,14 +1,19 @@
 .wrapper {
+  display: flex;
   margin: 15px 50%;
   max-width: 700px;
 }
+
+.bigbox {
+  display: flex;
+}
+
 .container-calendar {
   background: #ffffff;
   padding: 15px;
   width: 30%;
-  margin:  5%;
+  margin: 5%;
   overflow: 50%;
-  
 }
 .button-container-calendar button {
   cursor: pointer;
@@ -25,7 +30,7 @@
   width: 100%;
 }
 .table-calendar th,
-.table-calendar td{
+.table-calendar td {
   padding: 10px;
   border: 1px solid #e2e2e2;
   text-align: center;
@@ -41,11 +46,11 @@
 }
 /* 日曜 */
 .date-picker:nth-child(1) {
-color: red;
+  color: red;
 }
 /* 土曜 */
 .date-picker:nth-child(7) {
-color: blue;
+  color: blue;
 }
 #monthAndYear {
   text-align: center;
@@ -78,9 +83,79 @@ color: blue;
   border-radius: 3px;
   padding: 5px 1em;
 }
-.companytitle{
-    margin-left: 100px;
-    margin-top: 30px;
-    font-size: 30px;
-    font-weight: bold;
+.companytitle {
+  margin-left: 100px;
+  margin-top: 30px;
+  font-size: 30px;
+  font-weight: bold;
+}
+.box {
+  width: 300px;
+  height: 200px;
+  border: 2px solid rgb(245, 209, 255);
+  background-color: white;
+  padding: 10px;
+  margin-left: 200px;
+  text-align: center;
+}
+
+.sukebo {
+  color: rgb(7, 7, 231);
+  border: 2px solid rgb(14, 92, 238);
+  font-size: 13px;
+  background-color: white;
+  border-radius: 3rem;
+  padding: 5px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+.sukebo:hover {
+  background-color: rgba(146, 191, 226, 0.979);
+}
+.edit {
+  color: rgb(241, 9, 9);
+  border: 2px solid rgb(248, 2, 6);
+  font-size: 13px;
+  background-color: white;
+  border-radius: 3rem;
+  padding: 5px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+.edit:hover {
+  background-color: rgba(238, 199, 199, 0.979);
+}
+.button-container {
+  display: flex;
+  gap: 40px;
+  margin-left: 50px;
+  margin-top: 70px;
+  margin-bottom: 30px;
+}
+.box1 {
+  position: absolute;
+  width: 300px;
+  height: 200px;
+  border: 2px solid rgb(245, 209, 255);
+  background-color: white;
+  padding: 10px;
+  margin-left: -10px;
+}
+
+.title {
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.memo {
+  font-size: 12px;
+}
+.box2 {
+  position: absolute;
+  width: 300px;
+  height: 200px;
+  border: 2px solid rgb(245, 209, 255);
+  background-color: white;
+  padding: 10px;
+  margin-left: -10px;
 }
