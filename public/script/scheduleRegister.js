@@ -4,11 +4,13 @@ import { loadAndDisplayUserInfo } from "./header.js";
 
 const auth = new AuthWrapper();
 const firestore = new FirestoreWrapper();
+const params = new URLSearchParams(window.location.search);
+const companyId = params.get("id");
 
 document.addEventListener("DOMContentLoaded", () => {
   fetch("scheduleRegister.html")
-    .then(res => res.text())
-    .then(html => {
+    .then((res) => res.text())
+    .then((html) => {
       document.getElementById("schedule_modalContainer").innerHTML = html;
 
       const modalBackdrop = document.getElementById("schedule_modalBackdrop");
@@ -18,7 +20,6 @@ document.addEventListener("DOMContentLoaded", () => {
       const postBtn = document.getElementById("schedule_postModal");
 
       if (modalBackdrop && modalPanel && openBtn && closeBtn && postBtn) {
-
         openBtn.addEventListener("click", () => {
           modalBackdrop.classList.remove("hidden");
           modalPanel.classList.remove("hidden");
@@ -35,7 +36,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         postBtn.addEventListener("click", async () => {
-
           const start = document.getElementById("start-time").value;
           const end = document.getElementById("end-time").value;
           const title = document.getElementById("te-ma").value;
@@ -48,27 +48,22 @@ document.addEventListener("DOMContentLoaded", () => {
           if (!title && !startday && !start && !endday && !end) {
             alert("必要事項をすべて入力してください。");
             return;
+          } else if (title === "") {
+            alert("タイトルを入力してください。");
+            return;
+          } else if (startday === "") {
+            alert("開始日を入力してください。");
+            return;
+          } else if (start === "") {
+            alert("開始時間を入力してください。");
+            return;
+          } else if (endday === "") {
+            alert("終了日を入力してください。");
+            return;
+          } else if (end === "") {
+            alert("終了時間を入力してください。");
+            return;
           }
-          else if (title === "") {
-             alert("タイトルを入力してください。");
-              return; 
-            } 
-          else if (startday === "") {
-             alert("開始日を入力してください。"); 
-             return;
-             } 
-          else if (start === "") { 
-              alert("開始時間を入力してください。"); 
-              return;
-             }
-          else if (endday === "") {
-               alert("終了日を入力してください。");
-                return;
-               }
-          else if (end === "") { 
-                alert("終了時間を入力してください。"); 
-                return;
-               }
 
           if (endday < startday) {
             alert("終了日は開始日より後に設定してください。");
@@ -84,52 +79,50 @@ document.addEventListener("DOMContentLoaded", () => {
           }
 
           // 現在のユーザーを取得
-const currentUser = auth.getCurrentUser();
+          const currentUser = auth.getCurrentUser();
 
-try {
-  // Firestoreからuser情報を取得
-  const users = await firestore.getDocuments("users", [
-    { field: "email", operator: "==", value: currentUser.email }
-  ]);
+          try {
+            // Firestoreからuser情報を取得
+            const users = await firestore.getDocuments("users", [
+              { field: "email", operator: "==", value: currentUser.email },
+            ]);
 
-  if (users.length === 0) {
-    alert("ユーザー情報が見つかりません。");
-    return;
-  }
+            if (users.length === 0) {
+              alert("ユーザー情報が見つかりません。");
+              return;
+            }
 
-  const userData = users[0];
+            const userData = users[0];
 
-  // スケジュールデータ作成
-  const scheduleData = {
-    email: userData.email,
-    title: title,
-    start_day: startday,
-    start_time: start,
-    end_day: endday,
-    end_time: end,
-    place: location,
-    memo: memo,
-    created: FirestoreWrapper.dateToTimestamp(new Date())
-  };
+            // スケジュールデータ作成
+            const scheduleData = {
+              email: userData.email,
+              title: title,
+              start_day: startday,
+              start_time: start,
+              end_day: endday,
+              end_time: end,
+              place: location,
+              memo: memo,
+              id: companyId,
+              created: FirestoreWrapper.dateToTimestamp(new Date()),
+            };
 
-  await firestore.createDocument("schedule", scheduleData);
+            await firestore.createDocument("schedule", scheduleData);
 
-  alert("就活の予定が登録できました。");
+            alert("就活の予定が登録できました。");
 
-  loadAndDisplayUserInfo();
+            loadAndDisplayUserInfo();
 
-  modalBackdrop.classList.add("hidden");
-  modalPanel.classList.add("hidden");
-
-} catch (error) {
-  console.error("スケジュール登録時のエラー:", error);
-  alert("スケジュール登録に失敗しました。");
-}
+            modalBackdrop.classList.add("hidden");
+            modalPanel.classList.add("hidden");
+          } catch (error) {
+            console.error("スケジュール登録時のエラー:", error);
+            alert("スケジュール登録に失敗しました。");
+          }
         }); // ← postBtn.addEventListener の終了
-
       } else {
         console.error("モーダル要素が正しく読み込まれていません");
       }
     });
 }); // ← DOMContentLoaded の終了
-
