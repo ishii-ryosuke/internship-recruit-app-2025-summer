@@ -98,10 +98,14 @@ async function loadCompanyNameData() {
 loadCompanyNameData();
 async function loadcompanyDate() {
   try {
-    const allschedule = await firestore.getDocuments("schedule");
-    // [
-    //     { field: "id", operator: "==", value: `${companyId}`}]
-    startDates = allschedule
+    const allschedule = await firestore.getDocuments("schedule", [
+      { field: "id", operator: "==", value: `${companyId}` },
+    ]);
+    const companyschedule = allschedule.map((doc) => ({
+      start_day: doc.start_day ?? null,
+    }));
+
+    startDates = companyschedule
       .map((doc) => doc.start_day)
       .filter((date) => date !== null)
       .map((dateStr) => new Date(dateStr)); // 日付型に変換
