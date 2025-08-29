@@ -72,10 +72,10 @@ document.addEventListener("DOMContentLoaded", () => {
           try {
             //入力されてた企業名が登録されていれば取得
 
-            const sample = await firestore.getDocuments("companys");
+            const sample = await firestore.getDocuments("company");
             console.log("companys:", sample);
 
-            const same_name = await firestore.getDocuments("companys", [
+            const same_name = await firestore.getDocuments("company", [
               {
                 field: "company_name",
                 operator: "==",
@@ -93,7 +93,7 @@ document.addEventListener("DOMContentLoaded", () => {
             } else {
               await firestore.createDocument("company", companyData);
               console.log("regtest");
-              alert("企業情報を登録しました");
+              // alert("企業情報を登録しました");
             }
           } catch (error) {
             // エラー発生時のログ出力とアラート表示

@@ -69,7 +69,7 @@ const initModal = () => {
                 "ドキュメントが正常に削除されました！ID:",
                 docIdToDelete
               );
-              alert("企業情報を削除しました");
+              // alert("企業情報を削除しました");
               closeModal();
 
               // 削除後、企業一覧を再表示
@@ -118,15 +118,15 @@ const fetchAndDisplayCompanies = async () => {
 
       // ドキュメントIDをdata-id属性に埋め込む
       companyItem.innerHTML = `
-                <span class="text-lg font-medium text-gray-700">${company.company_name}</span>
-                <span class="text-lg font-medium text-gray-700">${company.job}</span>
-                <span class="text-lg font-medium text-gray-700">${company.place}</span>
-                <span class="text-lg font-medium text-gray-700">${company.exp}</span>
+                <span class="text-lg text-left min-w-50 max-w-50 font-medium text-gray-700">${company.company_name}</span>
+                <span class="text-lg text-left min-w-20 max-w-20 font-medium text-gray-700">${company.job}</span>
+                <span class="text-lg text-left min-w-20px max-w-20px font-medium text-gray-700">${company.place}</span>
+                <span class="text-lg text-left min-w-xs max-w-xs font-medium text-gray-700">${company.exp}</span>
 
                 <button onclick="location.href='./companySchedule.html'"
- class="schedule-btn bg-green-500 text-white font-bold py-2 px-4 rounded-full shadow-md hover:bg-green-600 transition-colors duration-200" data-id="${company.id}">スケジュール</button>
+ class="schedule-btn bg-white-500 text-green-500 font-bold py-2 px-4 rounded-full shadow-md border-1 border-green-500 hover:text-white hover:bg-green-600 transition-colors duration-200" data-id="${company.id}">スケジュール</button>
 
-                <button class="delete-btn bg-red-500 text-white font-bold py-2 px-4 rounded-full shadow-md hover:bg-red-600 transition-colors duration-200" data-id="${company.id}">削除</button>
+                <button class="delete-btn bg-white-500 text-red-500 font-bold py-2 px-4 mr-20 rounded-full shadow-md border-1 border-red-500 hover:text-white hover:bg-red-600 transition-colors duration-200" data-id="${company.id}">削除</button>
             `;
 
       companyListContainer.appendChild(companyItem);
